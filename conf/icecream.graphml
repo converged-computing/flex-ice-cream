@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+        http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd">
+
+    <!-- resource pool vertex generation spec attributes -->
+    <key id="root" for="node" attr.name="root" attr.type="int">
+        <default>0</default>
+    </key>
+    <key id="type" for="node" attr.name="type" attr.type="string"/>
+    <key id="basename" for="node" attr.name="basename" attr.type="string"/>
+    <key id="unit" for="node" attr.name="unit" attr.type="string"/>
+    <key id="size" for="node" attr.name="size" attr.type="long">
+        <default>1</default>
+    </key>
+
+    <!-- these seem required  -->
+    <key id="subsystem" for="node" attr.name="subsystem" attr.type="string">
+        <default>containment</default>
+    </key>
+    <key id="e_subsystem" for="edge" attr.name="e_subsystem" attr.type="string">
+        <default>containment</default>
+    </key>
+
+    <!-- resource relationship generation attributes     -->
+    <key id="relation" for="edge" attr.name="relation" attr.type="string">
+        <default>contains</default>
+    </key>
+    <key id="rrelation" for="edge" attr.name="rrelation" attr.type="string">
+        <default>in</default>
+    </key>
+
+    <!-- id generation method                             -->
+    <key id="id_scope" for="edge" attr.name="id_scope" attr.type="int">
+        <default>0</default>
+    </key>
+    <key id="id_start" for="edge" attr.name="id_start" attr.type="int">
+        <default>0</default>
+    </key>
+    <key id="id_stride" for="edge" attr.name="id_stride" attr.type="int">
+        <default>1</default>
+    </key>
+
+    <!-- resource gen method: multiply or associate-in   -->
+    <key id="gen_method" for="edge" attr.name="gen_method" attr.type="string">
+        <default>MULTIPLY</default>
+    </key>
+    <!-- argument (scaling factor) for multiply method   -->
+    <key id="multi_scale" for="edge" attr.name="multi_scale" attr.type="int">
+        <default>1</default>
+    </key>
+
+    <!-- generation recipe for the ice cream shop         -->
+    <graph id="ice_cream_shop" edgedefault="directed">
+
+        <!-- flavor subsystem generation recipe    -->
+        <!--TODO how to set limits (min/max for each)?-->
+        <node id="shop">
+            <data key="root">1</data>
+            <data key="type">shop</data>
+            <data key="basename">ice-cream-shop</data>
+        </node>
+        <node id="scoop">
+            <data key="type">scoop</data>
+            <data key="basename">scoop</data>
+            <data key="size">4</data>
+            <data key="unit">oz</data>
+        </node>
+        <node id="cone">
+            <data key="type">cone</data>
+            <data key="basename">cone</data>
+        </node>
+        <node id="cup">
+            <data key="type">cup</data>
+            <data key="basename">cup</data>
+        </node>
+        <node id="flavor">
+            <data key="type">flavor</data>
+            <data key="basename">flavor</data>
+        </node>
+        <node id="topping">
+            <data key="type">topping</data>
+            <data key="basename">topping</data>
+        </node>
+
+        <!-- You go to the shop and get a cup or a cone -->
+        <edge id="shop2cup" source="shop" target="cup"></edge>
+        <edge id="shop2cone" source="shop" target="cone"></edge>
+
+        <!-- A scoop has one flavor -->
+        <edge id="scoop2flavor" source="scoop" target="flavor">
+            <data key="id_scope">1</data>
+            <data key="multi_scale">1</data>        
+        </edge>
+
+        <!-- A cup or cone has as many toppings as they like -->
+        <edge id="cup2topping" source="cup" target="topping"></edge>
+        <edge id="scoop2topping" source="scoop" target="topping"></edge>
+
+        <!-- A small has one scoop -->
+        <edge id="small-cup" source="cup" target="scoop">
+            <data key="id_scope">1</data>
+            <data key="multi_scale">1</data>
+        </edge>
+        <edge id="small-cone" source="cone" target="scoop">
+            <data key="id_scope">1</data>
+            <data key="multi_scale">1</data>
+        </edge>
+
+        <!-- A medium has two scoops -->
+        <edge id="medium-cup" source="cup" target="scoop">
+            <data key="id_scope">1</data>
+            <data key="multi_scale">2</data>
+        </edge>
+        <edge id="medium-cone" source="cone" target="scoop">
+            <data key="id_scope">1</data>
+            <data key="multi_scale">2</data>
+        </edge>
+
+        <!-- A large has three scoops -->
+        <edge id="large-cup" source="cup" target="scoop">
+            <data key="id_scope">1</data>
+            <data key="multi_scale">2</data>
+        </edge>
+        <edge id="large-cone" source="cone" target="scoop">
+            <data key="id_scope">1</data>
+            <data key="multi_scale">3</data>
+        </edge>
+    </graph>
+</graphml>
+
