@@ -9,10 +9,6 @@ import (
 	"github.com/converged-computing/flex-ice-cream/src/graph"
 )
 
-const (
-// defaultspecFile = "icecream.yaml"
-)
-
 func main() {
 	fmt.Println("This is the flex ice cream matcher")
 	confFilePath := flag.String("conf", "conf/icecream.graphml", "icecream.graphml that describes the graph structure")

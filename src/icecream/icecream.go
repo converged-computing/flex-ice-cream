@@ -2,7 +2,7 @@ package icecream
 
 import "fmt"
 
-// An IceCreqmRequest is a simple request for ice cream
+// An IceCreamRequest is a simple request for ice cream
 // In this case, the number is akin to the jobid, and the Recipe is the allocaeed
 type IceCreamRequest struct {
 	Number uint64

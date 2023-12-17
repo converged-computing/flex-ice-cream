@@ -49,7 +49,7 @@ func (f *FlexGraph) Init(confFile string, matchPolicy string, label string) {
 	}
 
 	// Alert the user to all the chosen parameters
-	// Note that "grug" == "graphml" but probbably nobody knows what grug means
+	// Note that "grug" == "graphml" but probably nobody knows what grug means
 	fmt.Printf(" Match policy: %s\n", matchPolicy)
 	fmt.Println(" Load format: graphml (grug)")
 	fmt.Printf(" Config file: %s\n", confFile)
